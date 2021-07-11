@@ -1,0 +1,14 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    min-height: 5vh;
+}
+
+.title {
+    flex-grow: 1;
+}
+
+.nav_link {
+    text-decoration: none;
+    color: white;
+}
