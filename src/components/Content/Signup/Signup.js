@@ -4,7 +4,7 @@ import {
     Container,
     makeStyles,
     TextField,
-    Typography
+    Typography,
 } from "@material-ui/core";
 import * as yup from "yup";
 import {useFormik} from "formik";
@@ -56,8 +56,7 @@ const Signup = () => {
 
     const classes = useStyles();
     const dispatch = useDispatch()
-    const message = useSelector(state => state.message)
-
+    const message = useSelector(state => state.auth.message)
 
     const formik = useFormik({
         initialValues: {
@@ -70,7 +69,7 @@ const Signup = () => {
         onSubmit: (values)=>{
 
             // добавляем асинхронно пользователя в базу через thunk
-            dispatch(fetchUsers({email:values.email, password: values.password, fio: values.fio}))
+            dispatch(fetchUsers(JSON.stringify({email:values.email, password: values.password, fio: values.fio})))
 
         }
 
@@ -80,9 +79,8 @@ const Signup = () => {
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
-                    {message}
-                </Typography>
+
+
                 <Typography component="h1" variant="h5">
                     SIGN UP AS A STUDENT
                 </Typography>
