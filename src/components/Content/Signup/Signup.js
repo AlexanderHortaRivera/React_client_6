@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {
     Button,
     Container,
@@ -10,6 +10,7 @@ import * as yup from "yup";
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchUsers} from "../../../redux/asyncActions/users";
+import Toast from "../../Utils/Toast"
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -48,7 +49,6 @@ const validationSchema = yup.object({
         .string('Enter your email')
         .required('Email is required'),
 
-
 });
 
 
@@ -56,7 +56,7 @@ const Signup = () => {
 
     const classes = useStyles();
     const dispatch = useDispatch()
-    const message = useSelector(state => state.auth.message)
+
 
     const formik = useFormik({
         initialValues: {
@@ -70,7 +70,6 @@ const Signup = () => {
 
             // добавляем асинхронно пользователя в базу через thunk
             dispatch(fetchUsers(JSON.stringify({email:values.email, password: values.password, fio: values.fio})))
-
         }
 
     })
@@ -80,6 +79,7 @@ const Signup = () => {
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
 
+                <Toast/>
 
                 <Typography component="h1" variant="h5">
                     SIGN UP AS A STUDENT

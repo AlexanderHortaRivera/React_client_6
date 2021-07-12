@@ -1,6 +1,7 @@
 const SET_AUTH = "SET_AUTH"
 const SIGNUP_AUTH = "SIGNUP_AUTH"
 const ADD_USER = "ADD_USER"
+const CLEAR_MESSAGE = "CLEAR_MESSAGE"
 
 const initialState = {
     isAuth:false,
@@ -34,12 +35,15 @@ export default function authReducer (state = initialState, action) {
             }
 
         case ADD_USER:
-
             return {
                 ...state,
                 message: action.payload.message,
             }
-
+        case CLEAR_MESSAGE:
+            return {
+                ...state,
+                message: "",
+            }
 
         default:
             return state
@@ -51,3 +55,4 @@ export default function authReducer (state = initialState, action) {
 export const setAuth = (isAuth, email,id, data) => ({type: SET_AUTH, payload: {isAuth,email,id,data}})
 export const signUpAuth = (isAuth, email,password, data) => ({type: SIGNUP_AUTH, payload: {isAuth,email,password,data}})
 export const addUser = (message) => ({type: ADD_USER, payload: {message}})
+export const clearMessage = () => ({type: CLEAR_MESSAGE, payload: {}})
